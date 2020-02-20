@@ -1,5 +1,9 @@
 language: java
 
+branches:
+  only:
+  - swe261P
+
 matrix:
     include:
     - name: java8
