@@ -1,0 +1,24 @@
+language: java
+
+matrix:
+    include:
+    - name: java8
+      jdk: openjdk8
+      dist: xenial
+    
+    - name: java11
+      jdk: openjdk11
+      dist: bionic
+
+    - name: java13
+      jdk: openjdk13
+      dist: bionic
+
+before_install:
+- git clone https://github.com/spideruci/primitive-hamcrest.git  
+- cd primitive-hamcrest  
+- mvn install
+- cd ..
+
+after_success:
+- mvn clean test jacoco:report coveralls:report
