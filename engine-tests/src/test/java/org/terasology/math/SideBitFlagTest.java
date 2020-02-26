@@ -24,17 +24,17 @@ public class SideBitFlagTest {
     @Test
     public void getReverseTest(){
         //byte reverse = sideBitFlag.getReverse()
-        
-        byte bottom = sideBitFlag.getSideBits().get(Side.BOTTOM);
-        byte top = sideSet.get(Side.TOP);
+
+        byte bottom = sideBitFlag.getSide(Side.BOTTOM);
+        byte top = sideBitFlag.getSide(Side.TOP);
         assertEquals(bottom, sideBitFlag.getReverse(top));
 
-        byte left = sideSet.get(Side.LEFT);
-        byte right = sideSet.get(Side.RIGHT);
+        byte left = sideBitFlag.getSide(Side.LEFT);
+        byte right = sideBitFlag.getSide(Side.RIGHT);
         assertEquals(left, sideBitFlag.getReverse(right));
 
-        byte front = sideSet.get(Side.FRONT);
-        byte back = sideSet.get(Side.BACK);
+        byte front = sideBitFlag.getSide(Side.FRONT);
+        byte back = sideBitFlag.getSide(Side.BACK);
         assertEquals(front, sideBitFlag.getReverse(back));
         assertFalse(front == bottom);
     }
