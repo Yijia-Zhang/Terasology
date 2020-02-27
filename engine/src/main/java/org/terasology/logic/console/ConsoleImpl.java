@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
 /**
  * The console handles commands and messages.
  *
@@ -116,6 +117,7 @@ public class ConsoleImpl implements Console {
     private void addErrorMessage(String message) {
         addMessage(new Message(message, CoreMessageType.ERROR));
     }
+
 
     /**
      * Adds a message to the console
@@ -233,7 +235,6 @@ public class ConsoleImpl implements Console {
         if (commandName.isEmpty()) {
             return false;
         }
-
         //get the command
         ConsoleCommand cmd = getCommand(commandName);
 
@@ -308,6 +309,25 @@ public class ConsoleImpl implements Console {
 
         return hasPermission;
     }
+    public boolean clientHasPermissionForTest (EntityRef callingClient, String requiredPermission) {
+        Preconditions.checkNotNull(callingClient, "The calling client must not be null!");
+
+        PermissionManager permissionManager = context.get(PermissionManager.class);
+        boolean hasPermission = true;
+
+        if (permissionManager != null && requiredPermission != null
+                && !requiredPermission.equals(PermissionManager.NO_PERMISSION)) {
+            hasPermission = false;
+            ClientComponent clientComponent = callingClient.getComponent(ClientComponent.class);
+
+            if (permissionManager.hasPermission(clientComponent.clientInfo, requiredPermission)) {
+                hasPermission = true;
+            }
+        }
+
+        return hasPermission;
+    }
+
 
     private static String cleanCommand(String rawCommand) {
         // trim and remove double spaces
@@ -329,6 +349,7 @@ public class ConsoleImpl implements Console {
     @Override
     public List<String> processParameters(String rawCommand) {
         String cleanedCommand = cleanCommand(rawCommand);
+
         //get the command name
         int commandEndIndex = cleanedCommand.indexOf(" ");
 
