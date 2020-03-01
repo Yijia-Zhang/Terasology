@@ -4,6 +4,9 @@ branches:
   only:
   - swe261P
 
+jdk:
+  openjdk8
+
 matrix:
     include:
     - name: java8
