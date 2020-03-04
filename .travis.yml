@@ -7,10 +7,4 @@ branches:
 jdk:
   openjdk8
 
-before_install:
-- git clone https://github.com/spideruci/primitive-hamcrest.git  
-- cd primitive-hamcrest  
-- mvn install
-- cd ..
-
 
