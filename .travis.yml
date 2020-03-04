@@ -7,17 +7,10 @@ branches:
 jdk:
   openjdk8
 
-matrix:
-    include:
-    - name: java8
-      jdk: openjdk8
-      dist: xenial
-
 before_install:
 - git clone https://github.com/spideruci/primitive-hamcrest.git  
 - cd primitive-hamcrest  
 - mvn install
 - cd ..
 
-after_success:
-- mvn clean test jacoco:report coveralls:report
+
